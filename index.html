@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Morgan | AR Creator & Developer</title>
+  <meta name="description" content="Morgan — Certified System Engineer, Snapchat Lens Creator (60+ lenses, billions in reach), TikTok Effect Creator, and Content Creator.">
+  <meta property="og:title" content="Morgan | AR Creator">
+  <meta property="og:description" content="Snapchat Lens Creator — 56K+ subscribers, 60+ lenses, billions in reach">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #07070e; color: #e8e8f0; line-height: 1.5;
+    }
+    .bg-glow {
+      position: fixed; top: -50%; left: -20%; width: 140%; height: 140%;
+      background: radial-gradient(ellipse at 30% 20%, rgba(6, 182, 212, 0.06) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+      pointer-events: none; z-index: -1;
+    }
+    .container { max-width: 640px; margin: 0 auto; padding: 32px 20px; }
+
+    .hero { text-align: center; margin-bottom: 20px; }
+    .avatar-ring {
+      width: 72px; height: 72px; margin: 0 auto 10px;
+      border-radius: 50%; padding: 2px;
+      background: linear-gradient(135deg, #06b6d4, #8b5cf6, #ec4899);
+    }
+    .avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
+    .hero h1 {
+      font-size: 24px; font-weight: 700; letter-spacing: -0.3px;
+      background: linear-gradient(135deg, #06b6d4, #a78bfa); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero .username { color: #6b7280; font-size: 13px; margin-top: 2px; }
+    .hero .tagline { font-size: 12px; color: #9ca3af; margin-top: 6px; }
+
+    .social-strip {
+      display: flex; justify-content: center; gap: 8px; margin-bottom: 24px; flex-wrap: wrap;
+    }
+    .social-strip a {
+      display: flex; align-items: center; gap: 5px;
+      background: #0c0c18; border: 1px solid #1a1a2e; border-radius: 8px;
+      padding: 6px 12px; text-decoration: none; color: #c8c8d8; font-size: 12px;
+      transition: border-color 0.15s;
+    }
+    .social-strip a:hover { border-color: #2a2a4e; }
+    .social-strip .icon { font-size: 14px; }
+
+    .section { margin-bottom: 24px; }
+    .section h2 {
+      font-size: 12px; font-weight: 600; margin-bottom: 10px;
+      color: #6b7280; text-transform: uppercase; letter-spacing: 2px;
+    }
+
+    .lens-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .lens-card {
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+      background: #0c0c18; border: 1px solid #1a1a2e; border-radius: 8px;
+      padding: 10px 8px 8px; text-decoration: none; color: #e8e8f0;
+      transition: border-color 0.15s;
+    }
+    .lens-card:hover { border-color: #2a2a4e; }
+    .lens-thumb { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 6px; }
+    .lens-name { font-size: 11px; font-weight: 500; text-align: center; line-height: 1.2; }
+
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+    }
+    .about-item {
+      background: #0c0c18; border: 1px solid #1a1a2e; border-radius: 8px;
+      padding: 10px 12px; font-size: 12px; color: #c8c8d8;
+    }
+    .about-item .small { color: #6b7280; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+    .about-item .emoji { margin-right: 4px; }
+
+    .skills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 24px; }
+    .skill {
+      background: rgba(139, 92, 246, 0.08); padding: 4px 10px; border-radius: 12px;
+      font-size: 11px; color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.15);
+    }
+
+    .project {
+      background: #0c0c18; border: 1px solid #1a1a2e; border-radius: 8px;
+      padding: 12px 14px; margin-bottom: 8px;
+    }
+    .project:last-child { margin-bottom: 0; }
+    .project h3 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+    .project .meta { font-size: 11px; color: #6b7280; margin-bottom: 4px; }
+    .project p { font-size: 12px; color: #9ca3af; line-height: 1.4; }
+    .project .badge {
+      display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 8px;
+      background: rgba(6, 182, 212, 0.12); color: #22d3ee; margin-top: 6px;
+      border: 1px solid rgba(6, 182, 212, 0.15);
+    }
+    .project .badge a { color: inherit; text-decoration: none; }
+
+    .footer { text-align: center; padding-top: 20px; margin-top: 8px; border-top: 1px solid #1a1a2e; }
+    .footer p { color: #6b7280; font-size: 12px; }
+    .footer a { color: #22d3ee; text-decoration: none; }
+
+    @media (max-width: 480px) {
+      .lens-grid { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+      .about-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+  <div class="container">
+    <div class="hero">
+      <div class="avatar-ring">
+        <img class="avatar" src="morgan-snapchat-profile.jpeg" alt="Morgan">
+      </div>
+      <h1>Morgan</h1>
+      <p class="username">@colin4reall</p>
+      <p class="tagline">Certified System Engineer &bull; Snapchat Lens Creator &bull; TikTok Effect Creator &bull; Social Media Manager</p>
+    </div>
+
+    <div class="social-strip">
+      <a href="https://snapchat.com/add/colin4reall" target="_blank" rel="noopener">
+        <span class="icon">👻</span> Snapchat 56K+
+      </a>
+      <a href="https://tiktok.com/@colin4reall" target="_blank" rel="noopener">
+        <span class="icon">🎵</span> TikTok
+      </a>
+      <a href="https://instagram.com/colin4reall" target="_blank" rel="noopener">
+        <span class="icon">📷</span> Instagram
+      </a>
+      <a href="https://x.com/colin4reall" target="_blank" rel="noopener">
+        <span class="icon">𝕏</span> X
+      </a>
+      <a href="https://facebook.com/colin4reall" target="_blank" rel="noopener">
+        <span class="icon">📘</span> Facebook
+      </a>
+    </div>
+
+    <div class="section">
+      <h2>Featured Lenses</h2>
+      <div class="lens-grid">
+        <a href="https://www.snapchat.com/lens/874139aaf3404e9c8c1ab4f31764cfd7?type=SNAPCODE&metadata=01" target="_blank" class="lens-card" rel="noopener">
+          <img class="lens-thumb" src="lens-icons/glowtime.jpeg" alt="Glow Time / Day">
+          <span class="lens-name">Glow Time / Day</span>
+        </a>
+        <a href="https://www.snapchat.com/lens/b0e639f71d7941ed9787b50aab7c41e2?type=SNAPCODE&metadata=01" target="_blank" class="lens-card" rel="noopener">
+          <img class="lens-thumb" src="lens-icons/wc26.jpeg" alt="World Cup 2026">
+          <span class="lens-name">World Cup 2026</span>
+        </a>
+        <a href="https://www.snapchat.com/lens/78fc2f6c85274e1d8a4d5fb33a041db6?type=SNAPCODE&metadata=01" target="_blank" class="lens-card" rel="noopener">
+          <img class="lens-thumb" src="lens-icons/lens2.jpeg" alt="World Cup">
+          <span class="lens-name">World Cup</span>
+        </a>
+        <a href="https://www.snapchat.com/lens/a67b3e4568554b23b43a1d2fcbe850d8?type=SNAPCODE&metadata=01" target="_blank" class="lens-card" rel="noopener">
+          <img class="lens-thumb" src="lens-icons/beautysmooth.jpeg" alt="Beauty Smooth Skin">
+          <span class="lens-name">Beauty Smooth Skin</span>
+        </a>
+        <a href="https://www.snapchat.com/lens/f1b1aa5ca54d4cc485fa96203bd69c38?type=SNAPCODE&metadata=01" target="_blank" class="lens-card" rel="noopener">
+          <img class="lens-thumb" src="lens-icons/clear.jpeg" alt="Clear Light Skin">
+          <span class="lens-name">Clear Light Skin</span>
+        </a>
+        <a href="https://www.snapchat.com/lens/43159828c6184c48b1bffa072e007507?type=SNAPCODE&metadata=01" target="_blank" class="lens-card" rel="noopener">
+          <img class="lens-thumb" src="lens-icons/nyhiraba.jpeg" alt="Nyhiraba Cookathon">
+          <span class="lens-name">Nyhiraba Cookathon</span>
+        </a>
+        <a href="https://www.snapchat.com/lens/313c713c27b244adb23b35b7526db2fd?type=SNAPCODE&metadata=01" target="_blank" class="lens-card" rel="noopener">
+          <img class="lens-thumb" src="lens-icons/kejefair25.jpeg" alt="KejeFair25">
+          <span class="lens-name">KejeFair25</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>About</h2>
+      <div class="about-grid">
+        <div class="about-item">
+          <span class="small">💼 Role</span><br>
+          Certified System Engineer — Apple Support
+        </div>
+        <div class="about-item">
+          <span class="small">👻 Snapchat</span><br>
+          56K+ subscribers &bull; 60+ lenses &bull; billions in reach
+        </div>
+        <div class="about-item">
+          <span class="small">🎵 TikTok</span><br>
+          Effect Creator
+        </div>
+        <div class="about-item">
+          <span class="small">📱 Content</span><br>
+          Social Media Manager &bull; Content Creator
+        </div>
+      </div>
+    </div>
+
+    <div class="skills">
+      <span class="skill">Lens Studio</span>
+      <span class="skill">Effect House</span>
+      <span class="skill">JavaScript</span>
+      <span class="skill">Photoshop</span>
+      <span class="skill">AR Development</span>
+      <span class="skill">System Engineering</span>
+      <span class="skill">Content Creation</span>
+    </div>
+
+    <div class="section">
+      <h2>Projects</h2>
+      <div class="project">
+        <h3>World Cup 2026 Lens</h3>
+        <p class="meta">2025</p>
+        <p>48-team filter with country auto-detect, tap cycling, recording lock, and pulse. Pure JS, no APIs.</p>
+        <span class="badge"><a href="https://www.snapchat.com/lens/b0e639f71d7941ed9787b50aab7c41e2?type=SNAPCODE&metadata=01">Try it →</a></span>
+      </div>
+      <div class="project">
+        <h3>Beauty & Glow Collection</h3>
+        <p class="meta">Multiple lenses</p>
+        <p>Glow Time, Clear Light Skin, Beauty Smooth Glow, Sun-Kissed Glow, Natural Face, Soft Skin &amp; more.</p>
+      </div>
+      <div class="project">
+        <h3>Style & Branded Lenses</h3>
+        <p class="meta">Multiple lenses</p>
+        <p>Light Sunglasses, Happy New Year, BigBoys All White, TheSistersKeje, KejeFair25, Nyhiraba Cookathon.</p>
+      </div>
+      <div class="project">
+        <h3>Green Screen & Effects</h3>
+        <p class="meta">Multiple lenses</p>
+        <p>Green Screen BG, Light Smooth, 365 La Bel Finale, background replacement and color-grading lenses.</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>Collab? <a href="https://snapchat.com/add/colin4reall">Snapchat</a> &bull; <a href="https://instagram.com/colin4reall">Instagram</a></p>
+    </div>
+  </div>
+</body>
+</html>
